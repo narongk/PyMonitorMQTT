@@ -22,6 +22,11 @@ TOPIC_AVERAGE_LOAD_LAST_1 = 'cpu/cpu_avg_load/1minute'
 TOPIC_AVERAGE_LOAD_LAST_5 = 'cpu/cpu_avg_load/5minutes'
 TOPIC_AVERAGE_LOAD_LAST_15 = 'cpu/cpu_avg_load/15minutes'
 
+# CPU Fan {'it8772': [sfan(label='', current=0), sfan(label='', current=998), sfan(label='', current=0)]}
+TOPIC_FAN_1 = 'cpu/cpu_fan/fan1'
+TOPIC_FAN_2 = 'cpu/cpu_fan/fan2'
+TOPIC_FAN_3 = 'cpu/cpu_fan/fan3'
+
 # Supports ADVANCED
 
 
@@ -44,6 +49,10 @@ class CpuSensor(Entity):
             self.AddTopic(TOPIC_FREQ_MIN)
             self.AddTopic(TOPIC_FREQ_MAX)
             self.AddTopic(TOPIC_FREQ_CURRENT)
+            # CPU FAN
+            self.AddTopic(TOPIC_FAN_1)
+            self.AddTopic(TOPIC_FAN_2) 
+            self.AddTopic(TOPIC_FAN_3)
 
     def PostInitialize(self):
         self.os = self.GetOS()
@@ -77,6 +86,10 @@ class CpuSensor(Entity):
                                1], self.ValueFormatter.TYPE_FREQUENCY)
             self.SetTopicValue(TOPIC_FREQ_MAX, psutil.cpu_freq()[
                                2], self.ValueFormatter.TYPE_FREQUENCY)
+            print(str(psutil.sensors_fans()["it8772"][1].current))
+            self.SetTopicValue(TOPIC_FAN_1, str(psutil.sensors_fans()["it8772"][0].current), self.ValueFormatter.TYPE_FREQUENCY)
+            self.SetTopicValue(TOPIC_FAN_2, str(psutil.sensors_fans()["it8772"][1].current), self.ValueFormatter.TYPE_FREQUENCY)
+            self.SetTopicValue(TOPIC_FAN_3, str(psutil.sensors_fans()["it8772"][2].current), self.ValueFormatter.TYPE_FREQUENCY)
             if self.os != 'macOS':
                 # CPU avg load
                 self.SetTopicValue(TOPIC_AVERAGE_LOAD_LAST_1,

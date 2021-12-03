@@ -93,3 +93,24 @@ discovery:
         name: "Cpu average load (last 15 minutes)"
         unit_of_measurement: "s"
         icon: "mdi:calculator-variant"
+
+    - topic: cpu/cpu_fan/fan1
+      advanced_topic: True
+      payload:
+        name: "Cpu Fan 1"
+        unit_of_measurement: "rpm"
+        icon: "mdi:calculator-variant"
+
+    - topic: cpu/cpu_fan/fan2
+      advanced_topic: True
+      payload:
+        name: "Cpu Fan 2"
+        unit_of_measurement: "rpm"
+        icon: "mdi:calculator-variant"
+
+    - topic: cpu/cpu_fan/fan3
+      advanced_topic: True
+      payload:
+        name: "Cpu Fan 2"
+        unit_of_measurement: "rpm"
+        icon: "mdi:calculator-variant"

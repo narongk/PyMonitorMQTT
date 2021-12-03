@@ -38,10 +38,16 @@ class CpuTemperaturesSensor(Entity):
 
     def GetCpuTemperature_Unix(self):
         temps = psutil.sensors_temperatures()
+        data = {}
         if 'coretemp' in temps:
+            idx = 0
             for temp in temps['coretemp']:
                 if 'Core' in temp.label:
-                    return temp.current
+                    idx = idx+1
+                    #print(temp.current)
+                    data[temp.label]= temp.current
+            print("CpuTemperatures:",data);
+            return data["Core 0"]
         elif 'cpu_thermal' in temps:
             for temp in temps['cpu_thermal']:
                 return temp.current
