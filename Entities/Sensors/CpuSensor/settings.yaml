@@ -111,6 +111,6 @@ discovery:
     - topic: cpu/cpu_fan/fan3
       advanced_topic: True
       payload:
-        name: "Cpu Fan 2"
+        name: "Cpu Fan 3"
         unit_of_measurement: "rpm"
         icon: "mdi:calculator-variant"
