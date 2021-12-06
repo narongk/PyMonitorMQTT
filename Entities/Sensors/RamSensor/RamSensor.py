@@ -34,26 +34,28 @@ class RamSensor(Entity):
             self.AddTopic(TOPIC_SWAP_FREE)
 
     def Update(self):
-
-        self.SetTopicValue(TOPIC_MEMORY_PERCENTAGE, psutil.virtual_memory()[
+        try:
+            self.SetTopicValue(TOPIC_MEMORY_PERCENTAGE, psutil.virtual_memory()[
                            2], self.ValueFormatter.TYPE_PERCENTAGE)
-        self.SetTopicValue(TOPIC_SWAP_PERCENTAGE, psutil.swap_memory()[
-                           3], self.ValueFormatter.TYPE_PERCENTAGE)
-
-        if self.GetOption(self.consts.ADVANCED_INFO_OPTION_KEY):
-            # Virtual memory
-            self.SetTopicValue(TOPIC_MEMORY_TOTAL,
-                               psutil.virtual_memory()[0], self.ValueFormatter.TYPE_BYTE)
-            self.SetTopicValue(TOPIC_MEMORY_AVAILABLE,
-                               psutil.virtual_memory()[1], self.ValueFormatter.TYPE_BYTE)
-            self.SetTopicValue(TOPIC_MEMORY_USED,
-                               psutil.virtual_memory()[3], self.ValueFormatter.TYPE_BYTE)
-            self.SetTopicValue(TOPIC_MEMORY_FREE,
-                               psutil.virtual_memory()[4], self.ValueFormatter.TYPE_BYTE)
-            # Swap memory
-            self.SetTopicValue(
-                TOPIC_SWAP_TOTAL, psutil.swap_memory()[0], self.ValueFormatter.TYPE_BYTE)
-            self.SetTopicValue(
-                TOPIC_SWAP_USED,  psutil.swap_memory()[1], self.ValueFormatter.TYPE_BYTE)
-            self.SetTopicValue(
-                TOPIC_SWAP_FREE, psutil.swap_memory()[2], self.ValueFormatter.TYPE_BYTE)
+            self.SetTopicValue(TOPIC_SWAP_PERCENTAGE, psutil.swap_memory()[
+                            3], self.ValueFormatter.TYPE_PERCENTAGE)
+            if self.GetOption(self.consts.ADVANCED_INFO_OPTION_KEY):
+                # Virtual memory
+                self.SetTopicValue(TOPIC_MEMORY_TOTAL,
+                                psutil.virtual_memory()[0], self.ValueFormatter.TYPE_BYTE)
+                # print(psutil.virtual_memory()[4])
+                self.SetTopicValue(TOPIC_MEMORY_AVAILABLE,
+                                psutil.virtual_memory()[1], self.ValueFormatter.TYPE_BYTE)
+                self.SetTopicValue(TOPIC_MEMORY_USED,
+                                psutil.virtual_memory()[3], self.ValueFormatter.TYPE_BYTE)
+                self.SetTopicValue(TOPIC_MEMORY_FREE,
+                                psutil.virtual_memory()[4], self.ValueFormatter.TYPE_BYTE)
+                self.SetTopicValue(
+                    TOPIC_SWAP_TOTAL, psutil.swap_memory()[0], self.ValueFormatter.TYPE_BYTE)
+                self.SetTopicValue(
+                    TOPIC_SWAP_USED,  psutil.swap_memory()[1], self.ValueFormatter.TYPE_BYTE)
+                self.SetTopicValue(
+                    TOPIC_SWAP_FREE, psutil.swap_memory()[2], self.ValueFormatter.TYPE_BYTE)
+        except Exception as e:
+            print("get data RAM error",e)
+        
