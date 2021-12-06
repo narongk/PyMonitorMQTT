@@ -86,7 +86,6 @@ class CpuSensor(Entity):
                                1], self.ValueFormatter.TYPE_FREQUENCY)
             self.SetTopicValue(TOPIC_FREQ_MAX, psutil.cpu_freq()[
                                2], self.ValueFormatter.TYPE_FREQUENCY)
-            print(str(psutil.sensors_fans()["it8772"][1].current))
             self.SetTopicValue(TOPIC_FAN_1, str(psutil.sensors_fans()["it8772"][0].current), self.ValueFormatter.TYPE_FREQUENCY)
             self.SetTopicValue(TOPIC_FAN_2, str(psutil.sensors_fans()["it8772"][1].current), self.ValueFormatter.TYPE_FREQUENCY)
             self.SetTopicValue(TOPIC_FAN_3, str(psutil.sensors_fans()["it8772"][2].current), self.ValueFormatter.TYPE_FREQUENCY)
