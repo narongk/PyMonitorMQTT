@@ -16,3 +16,10 @@ Information form this client are well managed by home automation systems like [H
 ## Authors
 
 **Riccardo Briccola** - Project development - [Github Account](https://github.com/richibrics)
+
+
+Support CPU Fan on Linux
+sudo apt install lm-sensors
+sudo sensors-detect
+sudo reboot
+
