@@ -23,3 +23,10 @@ sudo apt install lm-sensors
 sudo sensors-detect
 sudo reboot
 
+sudo pwmconfig
+
+Auto run on boot Linux
+crontab -e
+@reboot /home/narongk/Documents/Projects/PyMonitorMQTT/shell_run.sh
+
+
